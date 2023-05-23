@@ -25,35 +25,40 @@ nput.<br><br>
 rm">
  @csrf
  <div class="form-group">
- <label for="nim">Nim</label>
- <input type="text" name="nim" class="formcontrol" id="nim" aria-describedby="nim" >
+ <label for="nim">Nim</label><br>
+ <input type="text" name="nim" class="form-control" id="nim" aria-describedby="nim" >
  </div>
  <div class="form-group">
- <label for="nama">Nama</label>
- <input type="nama" name="nama" class="formcontrol" id="nama" aria-describedby="nama" >
+ <label for="nama">Nama</label><br>
+ <input type="nama" name="nama" class="form-control" id="nama" aria-describedby="nama" >
  </div>
  <div class="form-group">
- <label for="kelas">Kelas</label>
- <input type="kelas" name="kelas" class="formcontrol" id="kelas" aria-describedby="password" >
+ <label for="kelas">Kelas</label><br>
+<select name="kelas" class="form-control">
+    @foreach($kelas as $Kelas){
+        <option value="{{ $Kelas->id }}" ">{{ $Kelas->nama_kelas }}</option>
+     }
+     @endforeach
+</select>
  </div>
  <div class="form-group">
- <label for="jurusan">Jurusan</label>
- <input type="jurusan" name="jurusan" class="formcontrol" id="jurusan" aria-describedby="jurusan" >
+ <label for="jurusan">Jurusan</label><br>
+ <input type="jurusan" name="jurusan" class="form-control" id="jurusan" aria-describedby="jurusan" >
  </div>
  <div class="form-group">
- <label for="no_handphone">No_Handphone</label>
- <input type="no_handphone" name="no_handphone" class="formcontrol" id="no_handphone" aria-describedby="no_handphone" >
+ <label for="no_handphone">No_Handphone</label><br>
+ <input type="no_handphone" name="no_handphone" class="form-control" id="no_handphone" aria-describedby="no_handphone" >
  </div>
 
  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" name="email" class="formcontrol" id="email" aria-describedby="email" >
+    <label for="email">Email</label><br>
+    <input type="email" name="email" class="form-control" id="email" aria-describedby="email" >
 </div>
 
 <div class="form-group">
-    <label for="tanggal_lahir">Tanggal Lahir</label>
-    <input type="date" name="tanggal_lahir" class="tanggal_lahir" id="tanggal_lahir" aria-describedby="tanggal_lahir" >
-    </div>
+    <label for="tanggal_lahir">Tanggal Lahir</label><br>
+    <input type="date" name="tanggal_lahir" id="tanggal_lahir" aria-describedby="tanggal_lahir" class="form-control">
+</div>
 
  <button type="submit" class="btn btn-primary">Submit</button>
  </form>

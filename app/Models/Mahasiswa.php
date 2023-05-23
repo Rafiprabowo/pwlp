@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Kelas;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mahasiswa extends Model
 {
@@ -18,10 +19,14 @@ class Mahasiswa extends Model
     protected $fillable= [
         'nim',
         'nama',
-        'kelas',
+        'kelas_id',
         'jurusan',
         'no_handphone',
         'email',
         'tanggal_lahir'
     ];
+
+    public function kelas(){
+        return $this->belongsTo(Kelas::class);
+    }
 }

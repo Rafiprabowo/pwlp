@@ -26,29 +26,34 @@ nput.<br><br>
  @method('PUT')
  <div class="form-group">
  <label for="nim">Nim</label>
- <input type="text" name="nim" class="formcontrol" id="nim" value="{{ $Mahasiswa->nim }}" ariadescribedby="nim" >
+ <input type="text" name="nim" class="form-control" id="nim" value="{{ $Mahasiswa->nim }}" ariadescribedby="nim" >
  </div>
  <div class="form-group">
  <label for="nama">Nama</label>
- <input type="text" name="nama" class="formcontrol" id="nama" value="{{ $Mahasiswa->nama }}" ariadescribedby="nama" >
+ <input type="text" name="nama" class="form-control" id="nama" value="{{ $Mahasiswa->nama }}" ariadescribedby="nama" >
  </div>
  <div class="form-group">
  <label for="kelas">Kelas</label>
- <input type="kelas" name="kelas" class="formcontrol" id="kelas" value="{{ $Mahasiswa->kelas }}" ariadescribedby="kelas" >
+ <select name="kelas" class="form-control">
+    @foreach($kelas as $Kelas){
+        <option value="{{ $Kelas->id }}" ">{{ $Kelas->nama_kelas }}</option>
+     }
+     @endforeach
+</select>
  </div>
  <div class="form-group">
  <label for="jurusan">Jurusan</label>
- <input type="jurusan" name="jurusan" class="formcontrol" id="jurusan" value="{{ $Mahasiswa->jurusan }}" ariadescribedby="jurusan" >
+ <input type="jurusan" name="jurusan" class="form-control" id="jurusan" value="{{ $Mahasiswa->jurusan }}" ariadescribedby="jurusan" >
  </div>
  <div class="form-group">
  <label for="no_handphone">No_Handphone</label>
 
- <input type="no_handphone" name="no_handphone" class="formcontrol" id="no_handphone" value="{{ $Mahasiswa->no_handphone }}" ariadescribedby="no_handphone" >
+ <input type="no_handphone" name="no_handphone" class="form-control" id="no_handphone" value="{{ $Mahasiswa->no_handphone }}" ariadescribedby="no_handphone" >
  </div>
 
  <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" name="email" class="formcontrol" id="email" aria-describedby="email" value="{{ $Mahasiswa->email }}" >
+    <input type="email" name="email" class="form-control" id="email" aria-describedby="email" value="{{ $Mahasiswa->email }}" >
 </div>
 
 <div class="form-group">
