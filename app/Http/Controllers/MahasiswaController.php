@@ -4,11 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use App\Models\Mahasiswa;
+use App\Models\MahasiswaMataKuliah;
+use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class MahasiswaController extends Controller
 {
+
+    
+    public function nilai($nim)
+    {
+
+        $Mahasiswa = Mahasiswa::find($nim);
+
+        return view('mahasiswas.nilai',compact('Mahasiswa'));
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -163,4 +177,7 @@ class MahasiswaController extends Controller
 
         return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa Berhasil Dihapus');
     }
+
+
+
 }
