@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use App\Models\Mahasiswa;
-use App\Models\MahasiswaMataKuliah;
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Models\MahasiswaMataKuliah;
 use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class MahasiswaController extends Controller
 {
@@ -21,6 +23,14 @@ class MahasiswaController extends Controller
 
         return view('mahasiswas.nilai',compact('Mahasiswa'));
 
+    }
+
+    public function cetakPDF($nim)
+    {
+        $Mahasiswa = Mahasiswa::find($nim);
+
+       $pdf =  PDF::loadview('mahasiswas.cetak_pdf',['Mahasiswa'=>$Mahasiswa]);
+        return $pdf->stream();
     }
 
     /**
@@ -68,16 +78,24 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim'=> 'required',
             'nama'=> 'required',
+            'image'=>'required',
             'jurusan'=> 'required',
             'no_handphone'=> 'required',
             'email'=> 'required',
-            'tanggal_lahir'=>'required'
+            'tanggal_lahir'=>'required',
+            
         ]);
 
         // Mahasiswa::create($request->all());
 
-        $mahasiswa = new Mahasiswa;
+     
 
+        $mahasiswa = new Mahasiswa; 
+
+        if($request->file('image'))
+        {
+            $mahasiswa->image = $request->file('image')->store('images','public');
+        }
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
         $mahasiswa->jurusan = $request->get('jurusan');
@@ -138,19 +156,36 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim'=> 'required',
             'nama'=> 'required',
+            'image'=>'required',
             'jurusan'=> 'required',
             'no_handphone'=> 'required',
             'email'=>'required',
-            'tanggal_lahir' => 'required'
+            'tanggal_lahir' => 'required',
+            
         ]);
 
         $mahasiswa = Mahasiswa::find($nim);
         
         $mahasiswa->nama = $request->get('nama');
         $mahasiswa->jurusan = $request->get('jurusan');
+
+        if($mahasiswa->image && file_exists('app/public'.$mahasiswa->image))
+        {
+            Storage::delete('public/'.$mahasiswa->image);
+        }
+        
+        if ($request->file('image') == null) {
+            $file = "";
+        }else{
+           $file = $request->file('image')->store('images','public');  
+        }
+        $mahasiswa->image = $file;
+
         $mahasiswa->no_handphone = $request->get('no_handphone');
         $mahasiswa->email = $request->get('email');
         $mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
+
+
 
         $kelas = new Kelas;
 

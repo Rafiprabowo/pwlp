@@ -22,16 +22,24 @@ nput.<br><br>
  </div>
  @endif
  <form method="post" action="{{ route('mahasiswa.store') }}" id="myFo
-rm">
+rm" enctype="multipart/form-data">
  @csrf
  <div class="form-group">
  <label for="nim">Nim</label><br>
  <input type="text" name="nim" class="form-control" id="nim" aria-describedby="nim" >
  </div>
+ 
  <div class="form-group">
  <label for="nama">Nama</label><br>
  <input type="nama" name="nama" class="form-control" id="nama" aria-describedby="nama" >
  </div>
+
+ <div class="form-group">
+    <label for="image">Image</label><br>
+    <input type="file" class="form-control" aria-describedby="image" name="image">
+ </div>
+
+
  <div class="form-group">
  <label for="kelas">Kelas</label><br>
 <select name="kelas" class="form-control">
@@ -41,10 +49,12 @@ rm">
      @endforeach
 </select>
  </div>
+ 
  <div class="form-group">
  <label for="jurusan">Jurusan</label><br>
  <input type="jurusan" name="jurusan" class="form-control" id="jurusan" aria-describedby="jurusan" >
  </div>
+ 
  <div class="form-group">
  <label for="no_handphone">No_Handphone</label><br>
  <input type="no_handphone" name="no_handphone" class="form-control" id="no_handphone" aria-describedby="no_handphone" >

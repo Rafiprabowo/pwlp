@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 
@@ -21,5 +22,7 @@ Route::get('/', function () {
 Route::resource('mahasiswa', MahasiswaController::class);
 
 Route::get('/mahasiswa/nilai/{nim}',[MahasiswaController::class,'nilai']);
-
+Route::resource('articles','App\Http\Controllers\ArticleController');
+Route::get('/article/cetak_pdf',[ArticleController::class,'cetakPdf']);
+Route::get('/mahasiswa/nilai/{nim}/cetak_pdf',[MahasiswaController::class,'cetakPDF']);
 
